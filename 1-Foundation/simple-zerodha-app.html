@@ -6,31 +6,34 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title>Zerodha</title>
+    <link
+      rel="stylesheet"
+      href="styles.css" />
   </head>
   <body>
-    <div>
+    <div style="display: flex; justify-content: space-between; padding: 20px 150px; box-shadow: 2px 1px 2px #eee">
       <img
         src="https://zerodha.com/static/images/logo.svg"
         alt="zerodha-img"
-        width="100px" />
-
-      <span>Sign up</span>
-      <span>About</span>
-      <span>Product</span>
-      <span>Pricing</span>
-      <span>Support</span>
+        width="150" />
+      <div style="display: flex; justify-content: space-between; width: 400px">
+        <a style="cursor: pointer">Sign up</a>
+        <a style="cursor: pointer">About</a>
+        <a style="cursor: pointer">Product</a>
+        <a style="cursor: pointer">Pricing</a>
+        <a style="cursor: pointer">Support</a>
+      </div>
     </div>
-    <center>
+    <div style="display: flex; justify-content: center">
       <img
         src="https://zerodha.com/static/images/landing.png"
         alt="main-img"
         width="80%" />
-    </center>
-    <br /><br /><br />
-    <center>
-      <h2>Invest in everything</h2>
-    </center>
-    <center><h4>Online platform to invest in stocks, derivatives, mutual funds and more</h4></center>
-    <center><button>Sign up now</button></center>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <h2 style="font-weight: 500">Invest in everything</h2>
+      <h4 style="font-weight: 400">Online platform to invest in stocks, derivatives, mutual funds and more</h4>
+      <button style="cursor: pointer">Sign up now</button>
+    </div>
   </body>
 </html>
