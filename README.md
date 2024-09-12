@@ -23,3 +23,10 @@
    - Data types - Strings, numbers and booleans
    - if/else
    - Loops - For loop
+5. Complex primitives
+   - Array
+   - Objects
+     - complex object
+6. Functions
+   - reusable code
+   - callback function
