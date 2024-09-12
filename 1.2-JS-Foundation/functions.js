@@ -26,15 +26,7 @@ function countDown() {
 //   console.log(`Time taken: ${timeTaken} ms`);
 // }, 1000);
 
-// let startTime = performance.now();
-
-// setTimeout(function () {
-//   let endTime = performance.now();
-//   let timeTaken = endTime - startTime;
-//   console.log(`Time taken: ${timeTaken.toFixed(2)} ms`);
-// }, 1000);
-
-function displayClock() {
+function displayTime() {
   let now = new Date();
 
   let hours = String(now.getHours()).padStart(2, "0");
@@ -44,7 +36,7 @@ function displayClock() {
   let timeString = `${hours}:${minutes}:${seconds}`;
 
   console.clear();
-  console.log(timeString);
+  console.log("Time: ", timeString);
 }
 
-setInterval(displayClock, 1000);
+setInterval(displayTime, 1000);

@@ -30,3 +30,30 @@
 6. Functions
    - reusable code
    - callback function
+
+## Auxillary methods of JavaScript - Level 1
+
+1. Strings
+   - length, indexOf, lastIndexOf, slice(0,5), subStr (deprecated), replace("",""), split(','), trim(), toUpperCase, toLowerCase
+2. Numbers
+   - parseInt, parseFloat
+3. Arrays
+   - push, pop, unshift, shit, concat, forEach
+   - callbacks, map, filter, reduce, find, sort
+
+## Level 2
+
+1. Classes (Structure that is re-usable. A blueprint)
+   - attributes, functions
+   - static functions (associate with the class it self)
+2. Date
+3. JSON
+   - JSON.parse
+   - JSON.stringify
+4. Maths
+5. Objects
+   - Object.keys() -> Array of keys
+   - Object.values()
+   - Object.entries(obj)
+   - obj.hasOwnProperty('name')
+   - object.assign
