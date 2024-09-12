@@ -1,24 +1,22 @@
-class Animal {
-  constructor(name, legCount, speaks) {
-    (this.name = name), (this.legCount = legCount), (this.speaks = speaks);
+class Car {
+  constructor(brand, doors, color) {
+    this.brand = brand;
+    this.doors = doors;
+    this.color = color;
   }
 
-  // static method
-  static myType() {
-    console.log("Animal");
+  static typeOf() {
+    console.log("Car Class");
   }
 
-  speak() {
-    return `Hi im a ${this.name} and i ${this.speaks}`;
-  }
   describe() {
-    return `${this.name} has ${this.legCount} legs.`;
+    console.log(`${this.brand} of ${this.color} color with ${this.doors}`);
   }
 }
 
-let dog = new Animal("doggie", 4, "bhow bhow"); // creates dog object
+// instance of a Car class.
+const ferrari = new Car("ferrari", 2, "red");
+ferrari.describe();
 
-console.log(dog.speak());
-console.log(dog.describe());
-
-Animal.myType();
+// invoking a static method
+Car.typeOf();
