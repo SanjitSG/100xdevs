@@ -1,5 +1,13 @@
-function findSum(a, b) {
-  return a + b;
-}
+let time = 10;
 
-console.log(findSum(2, 4));
+let timerId = setInterval(countDown, 1000);
+
+function countDown() {
+  if (time == 0) {
+    clearInterval(timerId);
+    console.log("time's up");
+  } else {
+    console.log(time);
+    time--;
+  }
+}
