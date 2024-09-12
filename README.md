@@ -57,3 +57,10 @@
    - Object.entries(obj)
    - obj.hasOwnProperty('name')
    - object.assign
+
+## Loops - Functions - Callbacks
+
+- anonymous function
+- passing function as argument
+
+## Async Functions - Browser Architecture - Promises
