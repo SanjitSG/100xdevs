@@ -64,3 +64,9 @@
 - passing function as argument
 
 ## Async Functions - Browser Architecture - Promises
+
+- Async functions
+- web apis - setTimeout
+- js engine architecture
+- promise
+- async/await
