@@ -5,8 +5,21 @@
   Once you've implemented the logic, test your code by running
 */
 
-function countVowels(str) {
-    // Your code here
-}
+//1. using regex
+// function countVowels(str) {
+//   return (str.match(/[aeiouAEIOU]/g) || []).length;
+// }
 
+// using for-of loop
+function countVowels(str) {
+  let count = 0;
+  let vowels = "aeiouAEIOU";
+
+  for (let ch of str) {
+    if (vowels.includes(ch)) {
+      count++;
+    }
+  }
+  return count;
+}
 module.exports = countVowels;
