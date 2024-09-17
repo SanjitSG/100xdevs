@@ -2,6 +2,7 @@ import express from "express";
 
 const app = express();
 const PORT = 3000;
+app.use(express.json());
 
 const users = [
   {
@@ -14,6 +15,7 @@ const users = [
   },
 ];
 
+// GET
 app.get("/", function (req, res) {
   // return total no of kidneys - healthy kidneys - unhealthy kidneys
 
@@ -22,7 +24,7 @@ app.get("/", function (req, res) {
 
   let numberOfHealthyKidneys = 0;
   const healthyKidneys = johnKidneys.filter((kidney) => {
-    kidney.healthy == true;
+    return kidney.healthy == true;
   });
 
   numberOfHealthyKidneys = healthyKidneys.length;
@@ -33,6 +35,33 @@ app.get("/", function (req, res) {
     numberOfHealthyKidneys,
     unhealthyKidneys,
   });
+});
+
+// 2. POST
+app.post("/", function (req, res) {
+  const isHealthy = req.body.isHealthy;
+  users[0].kidneys.push({
+    healthy: isHealthy,
+  });
+
+  res.json({
+    msg: "Done!",
+  });
+});
+
+// 3. PUT
+app.put("/", function (req, res) {
+  users[0].kidneys.forEach((kidney) => (kidney.healthy = true));
+  res.json({ success: "true" });
+});
+
+//4. DELETE
+app.delete("/", function (req, res) {
+  users[0].kidneys = users[0].kidneys.filter((kidney) => {
+    return kidney.healthy == true;
+  });
+
+  res.json({ success: "true" });
 });
 
 app.listen(PORT);
