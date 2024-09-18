@@ -4,6 +4,15 @@
 */
 
 function isPalindrome(str) {
+  str.toLowerCase().trim();
+  let n = str.length;
+  let i = 0;
+  while (i < n / 2) {
+    if (str[i] != str[n - 1 - i]) {
+      return false;
+    }
+    i++;
+  }
   return true;
 }
 
