@@ -9,16 +9,30 @@
   </head>
   <body>
     <input
+      oninput="execute()"
       type="text"
-      placeholder="Enter Principal" /><input
+      placeholder="Enter Principal" />
+    <input
+      oninput="execute()"
       type="text"
-      placeholder="Enter time period in years" /><input
+      placeholder="Enter time period in years" />
+    <input
+      oninput="execute()"
       type="text"
       placeholder="Enter interest rate" />
-    <button onclick="calc()">Calculator</button>
+
     <div id="result"></div>
 
     <script>
+      //debouncing
+      let timer;
+      function execute() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          calc();
+        }, 200);
+      }
+
       async function calc() {
         const input = document.querySelectorAll("input");
         const p = input[0].value;
