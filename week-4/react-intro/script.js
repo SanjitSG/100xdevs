@@ -27,10 +27,35 @@ function createChild(title, description, id) {
   return child;
 }
 
-function addTodo() {
-  const title = document.getElementById("title").value;
-  const desc = document.getElementById("desc")?.value;
+function updateDom(state) {
   const parent = document.getElementById("todos");
+  parent.innerHTML = "";
 
-  parent.appendChild(createChild(title, desc, globalId++));
+  for (let i = 0; i < state.length; i++) {
+    parent.appendChild(createChild(state[i].title, state[i].description, state[i].id));
+  }
 }
+let state = [
+  {
+    title: "DSA",
+    description: "Study dsa for 4 hours",
+    id: 1,
+  },
+  {
+    title: "development",
+    description: "Study dsa for 3 hours",
+    id: 2,
+  },
+  {
+    title: "Gym",
+    description: "Gym from 6-7pm",
+    id: 3,
+  },
+];
+// window.setInterval(async function () {
+//   const res = await fetch("https://sum-server.100xdevs.com/todos");
+//   const json = await res.json();
+//   updateDom(json.todos);
+// }, 5000);
+
+updateDom(state);
