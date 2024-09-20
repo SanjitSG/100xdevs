@@ -1,0 +1,27 @@
+<!-- PS: Create a todo application -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>todo</title>
+  </head>
+  <body>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 5px; align-items: center; width: 30%; padding: 10px">
+      <input
+        id="title"
+        type="text"
+        placeholder="title" />
+      <input
+        id="desc"
+        type="text"
+        placeholder="description" />
+      <button onclick="addTodo()">Add todo</button>
+      <div id="todos"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
