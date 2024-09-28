@@ -16,13 +16,54 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const app = express();
+const folderPath = path.join(__dirname, "files");
 
 app.get("/files", (req, res) => {
-  // file
+  fs.readdir(folderPath, (err, files) => {
+    try {
+      res.json({ files });
+    } catch (error) {
+      console.log(error);
+    }
+  });
 });
 
 app.get("/files/:filename", (req, res) => {
-  //
+  const filename = req.params.filename;
+  const filePath = path.join(folderPath, filename);
+
+  // Check if the file exists
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      return res.status(404).send("File not found");
+    }
+
+    // Read the file content if it exists
+    fs.readFile(filePath, "utf-8", (err, data) => {
+      if (err) {
+        return res.status(500).send("Error reading file");
+      }
+      res.status(200).send(data);
+    });
+  });
 });
+// app.get("/files/:filename", (req, res) => {
+//   const fileName = req.params.filename;
+//   const filePath = path.join(__dirname, fileName);
+//   console.log(fileName, filePath);
+
+//   fs.access(filePath, fs.constants.F_OK, (err) => {
+//     if (err) {
+//       return res.status(404).send("file not found");
+//     }
+
+//     fs.readFile(filePath, "utf-8", (err, data) => {
+//       if (err) {
+//         return res.status(500).send("error reading file");
+//       }
+//       res.status(200).json({ data });
+//     });
+//   });
+// });
 app.listen(3000);
 module.exports = app;
