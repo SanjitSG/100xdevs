@@ -46,7 +46,10 @@ const app = express();
 
 app.use(bodyParser.json());
 
-const todos = [{ id: "1", title: "gym", description: "go to gym 7am" }];
+const todos = [
+  { id: "1", title: "gym", description: "go to gym 7am" },
+  { id: "2", title: "coding", description: "coding 9am" },
+];
 // send all todos
 app.get("/todos", (req, res) => {
   res.status(200).send(todos);
@@ -54,10 +57,8 @@ app.get("/todos", (req, res) => {
 
 // send todo by id
 app.get("/todos/:id", (req, res) => {
-  console.log(req);
   const id = parseInt(req.params.id);
-
-  res.status(200).send(todos.find(id));
+  res.status(200).send(todos.find((todo) => todo.id == id));
 });
 
 app.listen(3000);
