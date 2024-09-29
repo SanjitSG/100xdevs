@@ -18,6 +18,7 @@ const path = require("path");
 const app = express();
 const folderPath = path.join(__dirname, "files");
 
+// getting list of files.
 app.get("/files", (req, res) => {
   fs.readdir(folderPath, (err, files) => {
     try {
@@ -28,42 +29,24 @@ app.get("/files", (req, res) => {
   });
 });
 
+//reading from a file.
 app.get("/files/:filename", (req, res) => {
   const filename = req.params.filename;
-  const filePath = path.join(folderPath, filename);
+  const filepath = path.join(folderPath, filename);
 
-  // Check if the file exists
-  fs.access(filePath, fs.constants.F_OK, (err) => {
+  fs.access(filepath, fs.constants.F_OK, (err) => {
     if (err) {
       return res.status(404).send("File not found");
     }
 
-    // Read the file content if it exists
-    fs.readFile(filePath, "utf-8", (err, data) => {
+    fs.readFile(filepath, "utf-8", (err, data) => {
       if (err) {
-        return res.status(500).send("Error reading file");
+        return res.status(500).send("error reading file");
       }
       res.status(200).send(data);
     });
   });
 });
-// app.get("/files/:filename", (req, res) => {
-//   const fileName = req.params.filename;
-//   const filePath = path.join(__dirname, fileName);
-//   console.log(fileName, filePath);
 
-//   fs.access(filePath, fs.constants.F_OK, (err) => {
-//     if (err) {
-//       return res.status(404).send("file not found");
-//     }
-
-//     fs.readFile(filePath, "utf-8", (err, data) => {
-//       if (err) {
-//         return res.status(500).send("error reading file");
-//       }
-//       res.status(200).json({ data });
-//     });
-//   });
-// });
 app.listen(3000);
 module.exports = app;
