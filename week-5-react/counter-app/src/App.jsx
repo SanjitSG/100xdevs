@@ -12,8 +12,12 @@ function App() {
     { title: "Study Dev", description: "Study harkarit dev", completed: false },
   ]);
 
+  function addTodo() {
+    setTodos([...todos, { title: "newTodo", description: "new todo Desc" }]);
+  }
   return (
     <>
+      <button onClick={addTodo}> Add todo</button>
       {todos.map((todo, index) => {
         return (
           <Todo
