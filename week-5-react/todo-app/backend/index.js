@@ -1,8 +1,9 @@
 import express from "express";
+import cors from "cors";
 import { createTodo, updateTodo } from "./types.js";
 import { todo } from "./db.js";
 const app = express();
-
+app.use(cors());
 app.use(express.json()); // automatic parsing json content
 
 // creating todo
