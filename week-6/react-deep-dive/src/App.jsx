@@ -1,21 +1,35 @@
 import { useState } from "react";
 import "./App.css";
-import Header from "./components/Header";
-
+import Todo from "./components/Todo";
+let counter = 4;
 function App() {
-  const [title1, setTitle1] = useState("Header1");
+  const [todoList, setTodoList] = useState([
+    {
+      id: 1,
+      title: "todo1",
+      description: "go to gym @ 9",
+    },
+    {
+      id: 2,
+      title: "todo2",
+      description: "DSA @10",
+    },
+    {
+      id: 3,
+      title: "todo3",
+      description: "dev @12",
+    },
+  ]);
 
-  function titleHandler() {
-    setTitle1("Updated Header " + (Math.random() * 100).toFixed(0));
+  function addTodoHandler() {
+    setTodoList([...todoList, { id: counter++, title: "new Todo", description: "new todo desc" }]);
   }
   return (
     <div>
-      <button onClick={titleHandler}>Click me to change title</button>
-      <Header title={title1} />
-      <Header title="Header2" />
-      <Header title="Header3" />
-      <Header title="Header4" />
-      <Header title="Header5" />
+      <button onClick={addTodoHandler}>Add a Todo</button>
+      {todoList.map((todo) => (
+        <Todo todo={todo} key={todo.id} />
+      ))}
     </div>
   );
 }
