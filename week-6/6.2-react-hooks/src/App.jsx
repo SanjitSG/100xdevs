@@ -1,33 +1,16 @@
 import "./App.css";
-import { useMemo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 
 function App() {
   const [counter, setCounter] = useState(0);
-  const [input, setInput] = useState(1);
 
-  let sum = useMemo(() => {
-    let sum = 0;
-    for (let i = 1; i <= input; i++) {
-      console.log("t");
-
-      sum += i;
-    }
-    return sum;
-  }, [input]);
+  const printHello = useCallback(() => {
+    console.log("Hello");
+  }, []);
 
   return (
     <div>
-      <input
-        type="number"
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-      <br />
-      <br />
-      Sum from 1 to {input} is {sum}
-      <br />
-      <br />
+      <NewButton prop={printHello} />
       <button
         onClick={() => {
           setCounter(counter + 1);
@@ -37,5 +20,15 @@ function App() {
     </div>
   );
 }
+
+const NewButton = memo(function ({ prop }) {
+  console.log("newBtn rendered");
+
+  return (
+    <div>
+      <button>New Button</button>
+    </div>
+  );
+});
 
 export default App;
