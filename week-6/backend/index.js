@@ -19,23 +19,21 @@ const todoData = [
 ];
 
 const generateRandomTodos = () => {
-  const numberOfTodos = Math.floor(Math.random() * 10) + 1; // Random number between 1 and 10
-  const shuffledTodos = todoData.sort(() => 0.5 - Math.random()); // Shuffle the predefined todos
-  return shuffledTodos.slice(0, numberOfTodos); // Return a random subset
+  const numberOfTodos = Math.floor(Math.random() * 10) + 1;
+  const shuffledTodos = todoData.sort(() => 0.5 - Math.random());
+  return shuffledTodos.slice(0, numberOfTodos);
 };
 
+// endpoint 1
 app.get("/todos", (req, res) => {
-  // generate random set of todos
   const todos = generateRandomTodos();
   res.json({ todos });
 });
 
+// endpoint 2
 app.get("/todo", (req, res) => {
-  console.log(req.query);
   const { id } = req.query;
-
   const todo = todoData.find((todo) => todo.id === parseInt(id));
-  console.log(todo);
 
   if (todo) {
     res.json({ todo });
