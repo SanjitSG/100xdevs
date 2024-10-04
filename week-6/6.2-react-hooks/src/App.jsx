@@ -1,34 +1,20 @@
+import { memo } from "react";
 import "./App.css";
-import { memo, useCallback, useState } from "react";
+import useTodo from "./hooks/useTodo";
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  const { todos, isLoading } = useTodo();
 
-  const printHello = useCallback(() => {
-    console.log("Hello");
-  }, []);
-
-  return (
-    <div>
-      <NewButton prop={printHello} />
-      <button
-        onClick={() => {
-          setCounter(counter + 1);
-        }}>
-        Counter ({counter})
-      </button>
-    </div>
-  );
+  return <>{isLoading ? <div>Loading</div> : todos.map((todo) => <Todo key={todo.id} todo={todo} />)}</>;
 }
 
-const NewButton = memo(function ({ prop }) {
-  console.log("newBtn rendered");
-
+const Todo = memo(({ todo }) => {
+  const { title, description } = todo;
   return (
     <div>
-      <button>New Button</button>
+      <h1>{title}</h1>
+      <h4>{description}</h4>
     </div>
   );
-});
-
+}, []);
 export default App;
