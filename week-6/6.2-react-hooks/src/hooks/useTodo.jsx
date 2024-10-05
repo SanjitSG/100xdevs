@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const useTodo = () => {
   const [todos, setTodos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setIsLoading(true);
     axios.get("https://todo-generator.onrender.com/todos").then((res) => {

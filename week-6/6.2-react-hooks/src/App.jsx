@@ -1,20 +1,51 @@
-import { memo } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import "./App.css";
-import useTodo from "./hooks/useTodo";
 
 function App() {
-  const { todos, isLoading } = useTodo();
+  const [a, setA] = useState(0);
+  const [b, setB] = useState(0);
+  const [c, setC] = useState(0);
 
-  return <>{isLoading ? <div>Loading</div> : todos.map((todo) => <Todo key={todo.id} todo={todo} />)}</>;
-}
+  useEffect(function () {
+    setTimeout(function () {
+      setA(10);
+    }, 1000);
 
-const Todo = memo(({ todo }) => {
-  const { title, description } = todo;
+    setTimeout(function () {
+      setB(20);
+    }, 5000);
+
+    setTimeout(function () {
+      setC(20);
+    }, 7000);
+  }, []);
+
+  const calcSum = useCallback(
+    function () {
+      console.log("calsum called");
+
+      return a + b;
+    },
+    [a, b]
+  );
+
   return (
     <div>
-      <h1>{title}</h1>
-      <h4>{description}</h4>
+      <h1>Home</h1>
+      <Result calcSum={calcSum} />
     </div>
   );
-}, []);
+}
+
+const Result = memo(({ calcSum }) => {
+  const sum = calcSum();
+  console.log("CHild renders");
+
+  return (
+    <>
+      <h3>Sum is {sum}</h3>
+    </>
+  );
+});
+
 export default App;
