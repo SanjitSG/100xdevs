@@ -6,28 +6,25 @@ function App() {
   const [b, setB] = useState(0);
   const [c, setC] = useState(0);
 
-  useEffect(function () {
-    setTimeout(function () {
+  useEffect(() => {
+    setTimeout(() => {
       setA(10);
     }, 1000);
 
-    setTimeout(function () {
+    setTimeout(() => {
       setB(20);
     }, 5000);
 
-    setTimeout(function () {
+    setTimeout(() => {
       setC(20);
     }, 7000);
   }, []);
 
-  const calcSum = useCallback(
-    function () {
-      console.log("calsum called");
+  const calcSum = useCallback(() => {
+    console.log("first");
 
-      return a + b;
-    },
-    [a, b]
-  );
+    return a + b;
+  }, [a, b]);
 
   return (
     <div>
