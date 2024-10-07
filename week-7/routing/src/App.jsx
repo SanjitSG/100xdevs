@@ -1,8 +1,9 @@
-import "./App.css";
 import { Suspense } from "react";
+import { lazy } from "react";
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+const Dashboard = lazy(() => import("./components/Dashboard"));
+// import Dashboard from "./components/Dashboard";
 import Landing from "./components/Landing";
-const Dashboard = React.lazy(() => import("./components/Dashboard"));
 
 function App() {
 	return (
@@ -56,4 +57,5 @@ function Appbar() {
 		</div>
 	);
 }
+
 export default App;
