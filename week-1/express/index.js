@@ -16,7 +16,7 @@ const users = [
 ];
 
 // GET
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
   // return total no of kidneys - healthy kidneys - unhealthy kidneys
 
   const johnKidneys = users[0].kidneys;
@@ -24,7 +24,7 @@ app.get("/", function (req, res) {
 
   let numberOfHealthyKidneys = 0;
   const healthyKidneys = johnKidneys.filter((kidney) => {
-    return kidney.healthy == true;
+    return kidney.healthy === true;
   });
 
   numberOfHealthyKidneys = healthyKidneys.length;
@@ -38,7 +38,7 @@ app.get("/", function (req, res) {
 });
 
 // 2. POST
-app.post("/", function (req, res) {
+app.post("/", (req, res) => {
   const isHealthy = req.body.isHealthy;
   users[0].kidneys.push({
     healthy: isHealthy,
@@ -50,13 +50,13 @@ app.post("/", function (req, res) {
 });
 
 // 3. PUT
-app.put("/", function (req, res) {
+app.put("/", (req, res) => {
   users[0].kidneys.forEach((kidney) => (kidney.healthy = true));
   res.json({ success: "true" });
 });
 
 //4. DELETE
-app.delete("/", function (req, res) {
+app.delete("/", (req, res) => {
   users[0].kidneys = users[0].kidneys.filter((kidney) => {
     return kidney.healthy == true;
   });

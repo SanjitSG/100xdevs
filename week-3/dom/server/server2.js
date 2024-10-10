@@ -4,9 +4,9 @@ const app = express();
 app.get("/calculate", (req, res) => {
   const { p, t, r } = req.query;
 
-  const principal = parseFloat(p);
-  const time = parseFloat(t);
-  const rate = parseFloat(r);
+  const principal = Number.parseFloat(p);
+  const time = Number.parseFloat(t);
+  const rate = Number.parseFloat(r);
 
   if (isNaN(principal) || isNaN(time) || isNaN(rate)) {
     return res.status(400).json({ error: "Invalid input values" });

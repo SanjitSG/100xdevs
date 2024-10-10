@@ -4,6 +4,7 @@ const jwtPassword = "secret123";
 
 const app = express();
 app.use(express.json());
+
 const ALL_USERS = [
   {
     username: "sanjit@gmail.com",
