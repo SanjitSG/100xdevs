@@ -1,23 +1,31 @@
-import { atom, selector } from "recoil"
+import axios from "axios";
+import { atom, selector } from "recoil";
 
-// consolodating all notificaitons into a single atom
-
+// Async data queries
 export const notificationsAtom = atom({
   key: "notificationsAtom",
-  default: {
-    network: 4,
-    jobs: 6,
-    messaging: 3,
-    notifications: 3
-  }
-})
+  default: selector({
+    key: "networkAtomSelector",
+    get: async () => {
+      const res = await axios.get("http://192.168.31.162:3000/");
+      console.log(res.data.notifications);
+
+      return res.data.notifications;
+    },
+  }),
+});
 
 
-
+// Selector to calculate total notifications
 export const totalNotificationSelector = selector({
   key: "totalNotificationSelector",
   get: ({ get }) => {
-    const allNotification = get(notificationsAtom)
-    return + allNotification.network + allNotification.jobs + allNotification.messaging + allNotification.notifications
-  }
-})
+    const notifications = get(notificationsAtom);
+    return (
+      notifications.network +
+      notifications.jobs +
+      notifications.messages +
+      notifications.notifications
+    );
+  },
+});
