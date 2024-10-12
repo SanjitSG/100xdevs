@@ -1,19 +1,30 @@
 import React from "react";
-import { RecoilRoot, useRecoilValue } from "recoil";
+import { RecoilRoot, useRecoilStateLoadable, useRecoilValue } from "recoil";
 import { todoAtomFamily } from "./todoAtomFamily";
 
 const App3 = () => {
   return <RecoilRoot>
-    <Todo id={1} />
-    <Todo id={2} />
+    <Todo id={3} />
+    <Todo id={19} />
   </RecoilRoot>;
 };
 
 function Todo({ id }) {
-  const currentTodo = useRecoilValue(todoAtomFamily(id))
-  return <>
-    <h2>{currentTodo.title}</h2>
-    <h2>{currentTodo.description}</h2>
-  </>
+  const [todo, setTodo] = useRecoilStateLoadable(todoAtomFamily(id))
+  if (todo.state === "loading") {
+    return <div>
+      <h2>Loading...</h2>
+    </div>
+  }
+  if (todo.state === "hasValue") {
+    return <>
+      <h2>{todo.contents.title}</h2>
+      <h2>{todo.contents.description}</h2>
+    </>
+  }
+  if (todo.state === "hasError") {
+    return <>
+      Errro while getting data</>
+  }
 }
 export default App3;
