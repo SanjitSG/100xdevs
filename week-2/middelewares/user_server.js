@@ -50,7 +50,7 @@ app.get("/users", (req, res) => {
     const username = decode.username;
     // returns all users
     return res.status(200).json({
-      users: ALL_USERS.filter((user) => user.username != username),
+      users: ALL_USERS.filter((user) => user.username !== username),
     });
   } catch {
     return res.status(403).json({
