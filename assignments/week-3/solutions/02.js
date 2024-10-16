@@ -22,9 +22,9 @@ function signJwt(username, password) {
 function verifyJwt(token) {
     let ans = true;
     try {
-       jwt.verify(token, jwtPassword);
-    } catch(e) {
-       ans = false;
+        jwt.verify(token, jwtPassword);
+    } catch (e) {
+        ans = false;
     }
     return ans;
 }
@@ -34,9 +34,8 @@ function decodeJwt(token) {
     const decoded = jwt.decode(token);
     if (decoded) {
         return true;
-    } else {
-        return false;
     }
+    return false;
 }
 
 module.exports = {

@@ -1,11 +1,11 @@
 import "./App.css";
+import Footer from "./components/Footer";
 import RevenueCard from "./components/RevenueCard";
-import { SidebarComponent } from "./components/Sidebar";
 
 function App() {
 	return (
 		<>
-			<SidebarComponent />
+			{/* <SidebarComponent /> */}
 			<div className="grid grid-cols-3">
 				<RevenueCard
 					title={"Amount Pending"}
@@ -13,6 +13,7 @@ function App() {
 					orderCount={13}
 				/>
 			</div>
+			<Footer />
 		</>
 	);
 }
