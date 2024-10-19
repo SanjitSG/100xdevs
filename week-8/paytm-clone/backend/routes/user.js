@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User } = require("../db/db");
-const { userSignupSchema } = require("../input-validator/validator");
+const { userSignupSchema, updateUserInfo } = require("../input-validator/validator");
 const { authMiddleware } = require("../middleware/middleware");
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -67,6 +67,15 @@ router.post("/signin", authMiddleware, async (req, res) => {
 });
 
 //update user info
+router.put("/update", authMiddleware, async (req, res)=>{
+	const {success} = updateUserInfo.safeParse(req.body)
+	if(!success){
+		res.status(411).json({message:"Error while updating information"})
+	}
 
+	await User.updateOne(req.body,{id: req.userId})
+
+	res.json({message: "Updated successfully"})
+})
 //list of user
 module.exports = router;

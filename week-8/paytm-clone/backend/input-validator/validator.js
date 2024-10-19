@@ -7,6 +7,11 @@ const userSignupSchema = zod.object({
   lastName: zod.string()
 })
 
+const updateUserInfo = zod.object({
+  password: zod.string().optional(),
+  firstName: zod.string().optional(),
+  lastName: zod.string().optional()
+})
 module.exports = {
-  userSignupSchema
+  userSignupSchema, updateUserInfo
 }
