@@ -2,44 +2,34 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User } = require("../db/db");
-const { userSignupSchema, updateUserInfo } = require("../input-validator/validator");
-const { authMiddleware } = require("../middleware/middleware");
-const JWT_SECRET = process.env.JWT_SECRET;
+const authMiddleware = require("../middleware/middleware");
+const {
+	userSignupSchema,
+	updateUserInfo,
+} = require("../input-validator/validator");
 
 //sign up
 router.post("/signup", async (req, res) => {
-	const { username, password, firstName, lastName } = req.body;
 	//zod validation
-	const { success } = userSignupSchema.safeParse({
-		username,
-		password,
-		firstName,
-		lastName,
-	});
+	const { success } = userSignupSchema.safeParse(req.body);
 	if (!success) {
 		return res.status(400).json({ message: "Incorrect inputs" });
 	}
 
 	//  checking if user already exist
-	const existingUser = User.findOne({
-		username,
-	});
+	const existingUser = User.findOne(req.body.username);
 	if (existingUser._id) {
 		return res.status(411).json({
-			message: "Email already taken / Incorrect input",
+			message: "User already taken / Incorrect input",
 		});
 	}
 
 	try {
 		// Creating a new user in the database
-		const dbUser = await User.create({
-			username,
-			password,
-			firstName,
-			lastName,
-		});
+		const dbUser = await User.create(req.body);
+
 		// generating jwt token
-		const token = jwt({ userId: dbUser._id }, JWT_SECRET);
+		const token = jwt.sign({ userId: dbUser._id }, process.env.JWT_SECRET);
 		res.status(201).json({
 			message: "User created!",
 			token: `Bearer ${token}`,
@@ -67,15 +57,18 @@ router.post("/signin", authMiddleware, async (req, res) => {
 });
 
 //update user info
-router.put("/update", authMiddleware, async (req, res)=>{
-	const {success} = updateUserInfo.safeParse(req.body)
-	if(!success){
-		res.status(411).json({message:"Error while updating information"})
+router.put("/update", authMiddleware, async (req, res) => {
+	const { success } = updateUserInfo.safeParse(req.body);
+	if (!success) {
+		return res
+			.status(411)
+			.json({ message: "Error while updating information" });
 	}
 
-	await User.updateOne(req.body,{id: req.userId})
+	const resp = await User.updateOne({ _id: req.userId }, { $set: req.body });
 
-	res.json({message: "Updated successfully"})
-})
+	res.json({ message: "Updated successfully" });
+});
+
 //list of user
 module.exports = router;
