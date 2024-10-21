@@ -16,6 +16,8 @@ router.post("/signup", async (req, res) => {
 		return res.status(400).json({ message: "Incorrect inputs" });
 	}
 
+	//
+
 	//  checking if user already exist
 	const existingUser = User.findOne(req.body.username);
 	if (existingUser._id) {
@@ -23,11 +25,9 @@ router.post("/signup", async (req, res) => {
 			message: "User already taken / Incorrect input",
 		});
 	}
-
 	try {
 		// Creating a new user in the database
 		const dbUser = await User.create(req.body);
-
 		// generating jwt token
 		const token = jwt.sign({ userId: dbUser._id }, process.env.JWT_SECRET);
 		res.status(201).json({
@@ -71,4 +71,20 @@ router.put("/update", authMiddleware, async (req, res) => {
 });
 
 //list of user
+router.get("/search", async (req, res) => {
+	const searchQuery = req.query.q || "";
+
+	try {
+		const users = await User.find({
+			$or: [
+				{ firstname: { $regex: searchQuery, $options: "i" } },
+				{ lastname: { $regex: searchQuery, $options: "i" } },
+			],
+		});
+		res.json({ users });
+	} catch (error) {
+		console.error("Error fetchign users", error);
+		res.status(500).json({ message: "Internal server error" });
+	}
+});
 module.exports = router;
