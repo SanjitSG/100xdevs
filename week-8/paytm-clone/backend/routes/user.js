@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { User } = require("../db/db");
+const { User, Account } = require("../db/db");
 const authMiddleware = require("../middleware/middleware");
 const {
 	userSignupSchema,
@@ -28,6 +28,12 @@ router.post("/signup", async (req, res) => {
 	try {
 		// Creating a new user in the database
 		const dbUser = await User.create(req.body);
+
+		// create an account
+		await Account.create({
+			userId: dbUser._id,
+			balance: 1 + Math.floor(Math.random() * 10000),
+		});
 		// generating jwt token
 		const token = jwt.sign({ userId: dbUser._id }, process.env.JWT_SECRET);
 		res.status(201).json({
