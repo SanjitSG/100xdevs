@@ -75,12 +75,15 @@ router.get("/search", async (req, res) => {
 	const searchQuery = req.query.q || "";
 
 	try {
-		const users = await User.find({
-			$or: [
-				{ firstname: { $regex: searchQuery, $options: "i" } },
-				{ lastname: { $regex: searchQuery, $options: "i" } },
-			],
-		});
+		const users = await User.find(
+			{
+				$or: [
+					{ firstname: { $regex: searchQuery, $options: "i" } },
+					{ lastname: { $regex: searchQuery, $options: "i" } },
+				],
+			},
+			{ firstname: 1, lastname: 1 },
+		);
 		res.json({ users });
 	} catch (error) {
 		console.error("Error fetchign users", error);
