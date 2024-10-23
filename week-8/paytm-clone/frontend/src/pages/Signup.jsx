@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import BottomWarning from "../components/BottomWarning";
 import Button from "../components/Button";
 import Heading from "../components/Heading";
 import InputBox from "../components/InputBox";
 import Subheading from "../components/Subheading";
+import signupHandler from "../handlers/signupHandler.js";
+
 const Signup = () => {
 	const [firstname, setFirstname] = useState("");
 	const [lastname, setLastname] = useState("");
-	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+
 	return (
 		<div className="bg-slate-300 h-screen flex justify-center">
 			<div className="flex flex-col justify-center">
@@ -26,7 +29,7 @@ const Signup = () => {
 						placeholder={"Doe"}
 					/>
 					<InputBox
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(e) => setUsername(e.target.value)}
 						label={"Email"}
 						placeholder={"John@google.com"}
 					/>
@@ -36,7 +39,17 @@ const Signup = () => {
 						placeholder={"123446"}
 					/>
 					<div className="pt-4">
-						<Button label={"Sign up"} />
+						<Button
+							onClick={() =>
+								signupHandler({
+									username,
+									password,
+									firstname,
+									lastname,
+								})
+							}
+							label={"Sign up"}
+						/>
 					</div>
 					<BottomWarning
 						label={"Already Have an account?"}

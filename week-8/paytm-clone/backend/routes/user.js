@@ -49,9 +49,11 @@ router.post("/signup", async (req, res) => {
 
 //singin
 router.post("/signin", authMiddleware, async (req, res) => {
-	const { username, password } = req.headers;
+	const { username, password } = req.body;
+
 	try {
-		const response = await User.find({ username, password });
+		const response = await User.findOne({ username, password });
+
 		if (response) {
 			res.status(200).json({ message: "Sign in success" });
 		} else {
