@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BottomWarning from "../components/BottomWarning";
 import Button from "../components/Button";
 import Heading from "../components/Heading";
@@ -9,6 +10,7 @@ import signinHandler from "../handlers/signinHandler";
 const Signin = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const navigate = useNavigate();
 
 	return (
 		<div className="bg-slate-300 h-screen flex justify-center">
@@ -35,6 +37,7 @@ const Signin = () => {
 								signinHandler({
 									username,
 									password,
+									navigate,
 								})
 							}
 						/>

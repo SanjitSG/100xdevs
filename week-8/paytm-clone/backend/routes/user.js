@@ -56,7 +56,9 @@ router.post("/signin", authMiddleware, async (req, res) => {
 		const response = await User.findOne({ username, password });
 
 		if (response) {
-			res.status(200).json({ message: "Sign in success", response });
+			res
+				.status(200)
+				.json({ message: "Sign in success", firstname: response.firstname });
 		} else {
 			res.status(400).json({ message: "Error" });
 		}
@@ -99,4 +101,6 @@ router.get("/search", async (req, res) => {
 		res.status(500).json({ message: "Internal server error" });
 	}
 });
+
+// /me endpoint
 module.exports = router;
