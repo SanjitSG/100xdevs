@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputBox from "../components/InputBox";
 import userDatafetchHandler from "../handlers/userDataFetchHandle";
 import Button from "./Button";
@@ -6,7 +7,6 @@ const Users = () => {
 	// make api call to extract users
 	const [userList, setUserList] = useState([]);
 	const [filter, setFilter] = useState("");
-
 	useEffect(() => {
 		const fetchUsers = async () => {
 			const data = await userDatafetchHandler(filter);
@@ -37,6 +37,7 @@ const Users = () => {
 };
 
 function User({ item }) {
+	const navigate = useNavigate();
 	return (
 		<div className="flex justify-between items-center p-2 border-b border-gray-300 w-3/5">
 			<div>
@@ -45,7 +46,12 @@ function User({ item }) {
 				</span>
 			</div>
 			<div>
-				<Button label={"Send Money"} />
+				<Button
+					onClick={() => {
+						navigate(`/send?id=${item._id}&name=${item.firstname}`);
+					}}
+					label={"Send Money"}
+				/>
 			</div>
 		</div>
 	);
