@@ -4,8 +4,8 @@ export default async function handleMoneyTransfer(id, amount) {
 		url: "http://localhost:3000/api/v1/account/transfer",
 		method: "POST",
 		data: {
-			id,
 			amount,
+			to: id,
 		},
 		headers: {
 			Authorization: localStorage.getItem("token"),

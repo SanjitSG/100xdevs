@@ -39,6 +39,7 @@ router.post("/signup", async (req, res) => {
 		res.status(201).json({
 			message: "User created!",
 			token: `Bearer ${token}`,
+			firstname: dbUser.firstname,
 		});
 	} catch (error) {
 		// Handling database errors
@@ -55,7 +56,7 @@ router.post("/signin", authMiddleware, async (req, res) => {
 		const response = await User.findOne({ username, password });
 
 		if (response) {
-			res.status(200).json({ message: "Sign in success" });
+			res.status(200).json({ message: "Sign in success", response });
 		} else {
 			res.status(400).json({ message: "Error" });
 		}

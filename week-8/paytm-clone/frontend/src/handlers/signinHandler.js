@@ -9,7 +9,6 @@ export default async function signinHandler({ username, password }) {
 			data: { username, password },
 			headers: { Authorization: localStorage.getItem("token") },
 		});
-		console.log(response);
 	} catch (error) {
 		console.error("Signin failed:", error.response || error.message);
 	}
