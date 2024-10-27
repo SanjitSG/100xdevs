@@ -38,6 +38,7 @@ const Users = () => {
 
 function User({ item }) {
 	const navigate = useNavigate();
+
 	return (
 		<div className="flex justify-between items-center p-2 border-b border-gray-300 w-3/5">
 			<div>
