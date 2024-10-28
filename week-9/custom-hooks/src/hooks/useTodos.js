@@ -18,7 +18,11 @@ export const useTodos = () => {
 				setLoading(false);
 			}
 		};
-		fetchTodos();
+		const value = setInterval(() => {
+			fetchTodos();
+		}, 5000);
+
+		return () => clearInterval(value);
 	}, []);
 	return { todos, loading };
 };

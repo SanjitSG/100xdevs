@@ -1,11 +1,14 @@
 import React from "react";
 import "./App.css";
+import { useIsOnline } from "./hooks/useIsOnline";
 import { useTodos } from "./hooks/useTodos";
 const App = () => {
-	const { todos, loading } = useTodos();
+	// const { todos, loading } = useTodos();
+	const isOnline = useIsOnline();
 	return (
 		<div id="parent">
-			<div id="child">
+			<div id="child">{isOnline ? "🟢" : "🔴"}</div>
+			{/* <div id="child">
 				{loading ? (
 					<div>Loading...</div>
 				) : (
@@ -20,7 +23,7 @@ const App = () => {
 						))}
 					</div>
 				)}
-			</div>
+			</div> */}
 		</div>
 	);
 };
