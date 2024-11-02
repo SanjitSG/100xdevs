@@ -1,3 +1,3 @@
 CREATE TABLE user{
-  id
+  id UNIQUE NOT NULL
 }
