@@ -31,10 +31,10 @@
 // });
 
 enum Direction {
-	Up = 0,
-	Down = 1,
-	Right = 2,
-	Left = 3,
+	Up = "up",
+	Down = "down",
+	Right = "right",
+	Left = "left",
 }
 
 function doSomething(keyPressed: Direction) {
@@ -44,3 +44,9 @@ function doSomething(keyPressed: Direction) {
 }
 
 doSomething(Direction.Down);
+
+function firstEle<T>(arr: T[]) {
+	return arr[0];
+}
+
+const x = firstEle(["San", "goa"]);
