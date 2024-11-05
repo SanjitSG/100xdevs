@@ -2,15 +2,12 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function main() {
-	await prisma.user.create({
-		data: {
-			email: "max@goa.com",
-			name: "Sarito jast",
-		},
-	});
-}
+// By ID
 
+async function main() {
+	const users = await prisma.post.findMany();
+	console.log(users);
+}
 main()
 	.then(async () => {
 		await prisma.$disconnect();

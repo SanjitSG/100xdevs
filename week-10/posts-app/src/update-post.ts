@@ -3,10 +3,12 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-	await prisma.user.create({
+	await prisma.post.update({
+		where: {
+			id: 3,
+		},
 		data: {
-			email: "max@goa.com",
-			name: "Sarito jast",
+			published: true,
 		},
 	});
 }
