@@ -5,12 +5,45 @@ const client = new Client({
 		"postgresql://postgres:mysecretpassword@localhost:5432/postgres",
 });
 
-async function createUsersTable() {
-	await client.connect();
-	const result = await client.query(
-		"CREATE TABLE users (id SERIAL PRIMARY KEY,username VARCHAR(255) UNIQUE NOT NULL,email VARCHAR(255) UNIQUE NOT NULL,password VARCHAR(255) NOT NULL,created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-	);
-	console.log(result);
+async function createTables() {
+	try {
+		await client.connect();
+
+		await client.query("BEGIN");
+
+		// Create the `users` table
+		await client.query(`
+      CREATE TABLE users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+		// Create the `address` table
+		await client.query(`
+      CREATE TABLE address (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        city VARCHAR(100) NOT NULL,
+        country VARCHAR(100) NOT NULL,
+        street VARCHAR(255) NOT NULL,
+        pincode VARCHAR(20),
+        created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+		await client.query("COMMIT");
+
+		console.log("Tables created successfully");
+	} catch (error) {
+		console.error("Error creating tables:", error);
+		await client.query("ROLLBACK"); // Rollback the transaction on error
+	} finally {
+		await client.end();
+	}
 }
 
-client;
+createTables();
