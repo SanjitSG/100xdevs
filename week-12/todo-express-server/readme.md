@@ -26,4 +26,7 @@ Structure
 4. Delete user
 
 ### Todo routes
- in progress... 
+1. Create todo
+2. Get todos ( based on userId )
+3. update todo ( based on todoId )
+4. delete todo (based on todoID )
