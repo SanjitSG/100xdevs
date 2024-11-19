@@ -1,8 +1,7 @@
 import type { PrismaClient } from "@prisma/client/extension";
 import { type Env, Hono } from "hono";
+import access from "./api/v1/access";
 import blog from "./api/v1/blog";
-import signin from "./api/v1/signin";
-import signup from "./api/v1/signup";
 import { getPrisma } from "./utils/db";
 
 const app = new Hono<{
@@ -18,9 +17,8 @@ app.use("*", async (c, next) => {
 	await next();
 });
 
-app.route("/api/v1", signup);
-app.route("/api/v1", signin);
-app.route("/api/v1", blog);
+app.route("/api/v1/", access);
+app.route("/api/v1/blog", blog);
 
 export default {
 	fetch: (request: Request, env: Env, ctx: ExecutionContext) => {
