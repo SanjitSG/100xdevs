@@ -1,5 +1,6 @@
 import type { PrismaClient } from "@prisma/client/extension";
 import { type Env, Hono } from "hono";
+import { cors } from "hono/cors";
 import access from "./api/v1/access";
 import blog from "./api/v1/blog";
 import { getPrisma } from "./utils/db";
@@ -10,6 +11,9 @@ const app = new Hono<{
 		prisma: PrismaClient;
 	};
 }>();
+
+// cors
+app.use("*", cors());
 
 app.use("*", async (c, next) => {
 	const prisma = getPrisma(c.env.DATABASE_URL);

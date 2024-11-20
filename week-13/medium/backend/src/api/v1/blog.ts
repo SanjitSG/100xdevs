@@ -12,7 +12,7 @@ blog.use("/*", authMiddleware);
 blog.post("/", async (c: Context) => {
 	const prisma: PrismaClient = await c.get("prisma");
 	const body = await c.req.json();
-	// Todo :
+
 	try {
 		const verification = createBlogSchema.safeParse(body);
 		if (!verification.success) {
@@ -64,7 +64,18 @@ blog.put("/:id", async (c: Context) => {
 blog.get("/bulk-blogs", async (c: Context) => {
 	const prisma: PrismaClient = await c.get("prisma");
 	try {
-		const blogs = await prisma.post.findMany();
+		const blogs = await prisma.post.findMany({
+			select: {
+				createdAt: true,
+				title: true,
+				content: true,
+				author: {
+					select: {
+						name: true,
+					},
+				},
+			},
+		});
 		console.log(blogs.length);
 		if (blogs.length === 0) {
 			return c.json({ message: "No blogs found" });
