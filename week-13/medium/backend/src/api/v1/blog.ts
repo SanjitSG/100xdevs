@@ -37,9 +37,10 @@ blog.post("/", async (c: Context) => {
 blog.put("/:id", async (c: Context) => {
 	const prisma: PrismaClient = await c.get("prisma");
 	const postId = c.req.param("id");
+
 	const body = await c.req.json();
-	// Todo : add zod validation
 	try {
+		// Todo : add zod validation
 		const verification = updateBlogSchema.safeParse(body);
 		if (!verification.success) {
 			throw new Error("Invalid content!");
@@ -66,6 +67,7 @@ blog.get("/bulk-blogs", async (c: Context) => {
 	try {
 		const blogs = await prisma.post.findMany({
 			select: {
+				id: true,
 				createdAt: true,
 				title: true,
 				content: true,

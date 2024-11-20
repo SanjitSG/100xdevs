@@ -1,47 +1,36 @@
-import React from "react";
 import Avatar from "./Avatar";
 
-type Blog = {
-	id: string;
-	createdAt: Date;
-	published: boolean;
-	title: string;
-	content: string;
-	author: {
-		name: string | null;
-	};
-};
-
-const BlogCard = React.memo(({ blog }: { blog: Blog }) => {
+const BlogCard2 = () => {
 	return (
-		<div className="block max-w-screen-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 my-2">
-			<div className="flex space-x-1 items-center h-4">
+		<div className="m-2 p-3 w-2/3 h-auto border">
+			<div className="flex space-x-2 items-center h-4">
 				<Avatar />
-				<div className="text-xs text-slate-600 font-medium">
-					{blog.author?.name || "Anonymous"}
+				<div className="text-xs uppercase text-slate-600 font-medium">
+					Sanjit SG
 				</div>
 				<div className="text-slate-200">|</div>
-				<div className="text-xxs text-slate-500  font-light">
-					{new Date(blog.createdAt).toLocaleDateString()}
-				</div>
+				<div className="text-xs text-slate-500  font-light">25-Nov-24</div>
 			</div>
 			<div className="flex p-3">
-				<div className="w-7/10 flex-1 pr-4">
-					<h2 className="font-bold text-xl">{blog.title}</h2>
-					<p className="text-sm text-gray-700">{`${blog.content.slice(0, 100)}...`}</p>
+				<div className="w-7/10 pr-4">
+					<h2 className="font-bold text-xl">
+						It happened on Medium: September 2024 roundup
+					</h2>
+					<p className="text-sm text-gray-700">
+						Discussion-sparking subject lines, potent quotables, and new
+						publications to follow.
+					</p>
 				</div>
 				<div className="w-3/10 h-28">
 					<img
-						className=" w-full h-full object-cover rounded-xl"
+						className=" w-full h-full object-cover rounded-xl border"
 						src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/content-gallery-3.png"
 						alt="image-description"
 					/>
 				</div>
 			</div>
 			<div className="flex justify-between  mt-3">
-				<p className="text-xxs text-gray-400">
-					{Math.ceil(blog.content.length / 60)} min read
-				</p>
+				<p className="text-xs text-gray-400">3 min read</p>
 				<div className="">
 					<div className="flex justify-center items-center space-x-3 ">
 						<svg
@@ -65,6 +54,6 @@ const BlogCard = React.memo(({ blog }: { blog: Blog }) => {
 			</div>
 		</div>
 	);
-});
+};
 
-export default BlogCard;
+export default BlogCard2;

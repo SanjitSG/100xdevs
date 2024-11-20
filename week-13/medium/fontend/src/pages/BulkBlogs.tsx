@@ -1,5 +1,6 @@
 import React from "react";
 import BlogCard from "../components/BlogCard";
+
 import BlogShimmer from "../components/BlogShimmer";
 import { useFetchBlogs } from "../hooks/useFetchBlogs";
 
@@ -21,11 +22,11 @@ const BulkBlogs = () => {
 	}
 
 	if (isError) {
-		return <>Error..</>;
+		return <>Error</>;
 	}
 
 	return (
-		<div>
+		<div className="flex flex-col items-center border border-red-500">
 			{blogs && blogs.length > 0 ? (
 				blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
 			) : (

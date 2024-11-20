@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import Navbar from "./components/Navbar";
 import Blog from "./pages/Blog";
 import BulkBlogs from "./pages/BulkBlogs";
 import ErrorPage from "./pages/ErrorPage";
@@ -10,6 +11,7 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
+				<Navbar />
 				<Routes>
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/signin" element={<Signin />} />
