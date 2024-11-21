@@ -4,7 +4,7 @@ import Avatar from "./Avatar";
 type Blog = {
 	id: string;
 	createdAt: Date;
-	published: boolean;
+	published?: boolean;
 	title: string;
 	content: string;
 	author: {
@@ -13,8 +13,12 @@ type Blog = {
 };
 
 const BlogCard = React.memo(({ blog }: { blog: Blog }) => {
+	if (!blog) {
+		return <div className="text-gray-500">Blog data is unavailable</div>;
+	}
+
 	return (
-		<div className="block max-w-screen-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 my-2">
+		<div className="cursor-pointer block max-w-screen-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 my-2">
 			<div className="flex space-x-1 items-center h-4">
 				<Avatar />
 				<div className="text-xs text-slate-600 font-medium">

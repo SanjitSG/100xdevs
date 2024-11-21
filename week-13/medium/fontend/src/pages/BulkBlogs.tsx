@@ -1,6 +1,7 @@
 import React from "react";
 import BlogCard from "../components/BlogCard";
 
+import { Link } from "react-router-dom";
 import BlogShimmer from "../components/BlogShimmer";
 import { useFetchBlogs } from "../hooks/useFetchBlogs";
 
@@ -28,7 +29,11 @@ const BulkBlogs = () => {
 	return (
 		<div className="flex flex-col items-center border border-red-500">
 			{blogs && blogs.length > 0 ? (
-				blogs.map((blog) => <BlogCard key={blog.id} blog={blog} />)
+				blogs.map((blog) => (
+					<Link key={blog.id} to={`/blog/${blog.id}`}>
+						<BlogCard blog={blog} />
+					</Link>
+				))
 			) : (
 				<div className="text-gray-500">No blogs available.</div>
 			)}

@@ -99,6 +99,17 @@ blog.get("/:id", async (c: Context) => {
 			where: {
 				id: postId,
 			},
+			select: {
+				id: true,
+				title: true,
+				content: true,
+				createdAt: true,
+				author: {
+					select: {
+						name: true,
+					},
+				},
+			},
 		});
 		c.status(200);
 		return c.json({ blogPost });
