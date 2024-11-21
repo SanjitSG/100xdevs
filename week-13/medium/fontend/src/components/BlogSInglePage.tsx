@@ -1,3 +1,4 @@
+import HTMLReactParser from "html-react-parser/lib/index";
 import Avatar from "./Avatar";
 
 type Blog = {
@@ -16,7 +17,7 @@ const BlogSInglePage = ({ blog }: { blog: Blog }) => {
 	}
 
 	return (
-		<div className="max-w-screen-sm lg:max-w-screen-lg h-auto m-auto p-4 flex justify-center lg:px-20">
+		<div className="max-w-screen-sm lg:max-w-screen-lg h-auto m-auto  pt-28 flex justify-center lg:px-20">
 			<div className="p-2">
 				{/* title */}
 				<div id="title">
@@ -41,7 +42,9 @@ const BlogSInglePage = ({ blog }: { blog: Blog }) => {
 					</div>
 				</div>
 				{/* content */}
-				<div className="mt-7 text-lg text-justify p-2">{blog.content}</div>
+				<div className="mt-7 text-lg text-justify p-2 indent-7 font-medium capitalize">
+					{HTMLReactParser(blog.content)}
+				</div>
 			</div>
 		</div>
 	);

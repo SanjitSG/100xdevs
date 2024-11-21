@@ -4,7 +4,7 @@ const BlogShimmer = () => {
 			<div
 				// biome-ignore lint/a11y/useSemanticElements: <explanation>
 				role="status"
-				className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center"
+				className="space-y-8 max-w-sm md:max-w-3xl animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center mx-auto"
 			>
 				<div className="flex items-center justify-center w-full h-48 bg-gray-300 rounded sm:w-96 ">
 					<svg

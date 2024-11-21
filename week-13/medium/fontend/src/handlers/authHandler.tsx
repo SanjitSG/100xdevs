@@ -1,5 +1,6 @@
 import type { SigninSchema, SignupSchema } from "@nexgoa/blog-common";
 import axios from "axios";
+import type { NavigateFunction } from "react-router-dom";
 import { BACKEND_URL } from "../config.tsx";
 
 export const signUpHandler = async (
@@ -14,11 +15,10 @@ export const signUpHandler = async (
 				"Content-Type": "application/json",
 			},
 		});
-		console.log(response);
 
 		const { jwt } = response.data;
 		localStorage.setItem("token", jwt);
-		navigate("/blog/1");
+		navigate("/");
 	} catch (error) {
 		alert("Error occured during sign up");
 		console.error("Error: ", error);
@@ -38,11 +38,16 @@ export const signinHandler = async (
 			},
 		});
 
-		const { jwt } = response.data;
-		localStorage.setItem("token", jwt);
-		navigate("/blog/1");
+		const { token } = response.data;
+		localStorage.setItem("token", token);
+		navigate("/");
 	} catch (error) {
 		alert("Error occured during signing in");
 		console.error("Error: ", error);
 	}
+};
+
+export const logoutHandle = (navigate: NavigateFunction): void => {
+	localStorage.clear();
+	navigate("/signin");
 };

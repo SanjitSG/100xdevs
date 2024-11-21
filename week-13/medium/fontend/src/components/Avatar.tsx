@@ -1,10 +1,8 @@
-import React from "react";
-
 interface AvatarProps {
 	size?: number;
 }
 
-const Avatar = ({ size = 4 }: AvatarProps) => {
+const Avatar = ({ size = 5 }: AvatarProps) => {
 	return (
 		<div className={`h-${size}`}>
 			<div

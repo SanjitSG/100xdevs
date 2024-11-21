@@ -78,7 +78,6 @@ blog.get("/bulk-blogs", async (c: Context) => {
 				},
 			},
 		});
-		console.log(blogs.length);
 		if (blogs.length === 0) {
 			return c.json({ message: "No blogs found" });
 		}
@@ -91,10 +90,15 @@ blog.get("/bulk-blogs", async (c: Context) => {
 });
 // get post by id
 blog.get("/:id", async (c: Context) => {
-	const postId = c.get("id");
+	const postId = c.req.param("id");
+
 	const prisma: PrismaClient = await c.get("prisma");
 
 	try {
+		if (postId === undefined) {
+			throw new Error("Id not found");
+		}
+
 		const blogPost = await prisma.post.findFirst({
 			where: {
 				id: postId,
