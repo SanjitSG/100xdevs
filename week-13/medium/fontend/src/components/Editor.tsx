@@ -39,8 +39,11 @@ const Editor = () => {
 			content: value,
 		}));
 	};
+
 	const handlePublish = async () => {
-		if (newBlog.title || newBlog.content === "") {
+		console.log(newBlog);
+
+		if (!newBlog.title || !newBlog.content) {
 			toast.error("Title and content cannot be empty.");
 			return;
 		}
@@ -57,22 +60,27 @@ const Editor = () => {
 	};
 
 	return (
-		<div className="max-w-sm lg:max-w-3xl h-auto m-auto flex flex-col justify-center">
-			<div className="m-2 p-2 shadow-xl rounded-xl">
+		<div className="max-w-sm lg:max-w-3xl h-auto mx-auto flex flex-col justify-center">
+			<div className="mt-24 mx-2 p-6 shadow-xl rounded-xl bg-white">
 				<div id="heading">
 					<h2 className="text-3xl font-bold text-center">Create Blog</h2>
 				</div>
-				<div className="my-3">
+				<div className="my-4 px-3">
 					<input
 						type="text"
 						onChange={handleTitleChange}
 						placeholder="Title"
-						className="px-3 outline-none border w-full rounded-xl h-12"
+						className="px-3 py-2 outline-none border border-gray-300 w-full rounded-xl text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 					/>
 				</div>
-				<div id="editor" className="h-[300px] ">
+				<div id="editor" className="my-4">
 					<ReactQuill
-						className="w-full h-fit border-none"
+						className="h-64 border border-gray-300 rounded-lg text-gray-800"
+						style={{
+							minHeight: "200px", // Ensure a minimum height for the editor
+							maxHeight: "400px", // Optional: Max height for better control
+							overflowY: "auto", // Ensure scrolling if content exceeds max height
+						}}
 						value={newBlog.content}
 						onChange={handleContentChange}
 						placeholder="Write your blog content here..."
@@ -82,7 +90,7 @@ const Editor = () => {
 					<button
 						onClick={handlePublish}
 						type="button"
-						className="text-white w-2/4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+						className="text-white w-2/4 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-xl text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 					>
 						Publish
 					</button>

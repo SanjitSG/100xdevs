@@ -1,0 +1,65 @@
+.quill > * {
+	border-color: inherit !important;
+	color: inherit !important;
+}
+
+.quill > .ql-toolbar {
+	/* border radius of the toolbar */
+	border-radius: 10px 10px 0 0;
+}
+
+.quill > .ql-container {
+	/* border radius of the container and for font size */
+	font-size: inherit;
+	border-radius: 0 0 10px 10px;
+}
+
+.ql-toolbar.ql-snow .ql-picker-label {
+	color: inherit !important;
+	opacity: 0.76;
+}
+
+.ql-snow .ql-picker {
+	color: inherit !important;
+}
+
+.quill > .ql-container > .ql-editor.ql-blank::before {
+	/* for placeholder */
+	color: inherit;
+}
+
+.ql-snow.ql-toolbar button svg {
+	opacity: 0.76;
+	color: currentColor;
+}
+
+.ql-snow .ql-stroke {
+	/* for the border of the editor */
+	stroke: currentColor !important;
+}
+
+.ql-snow .ql-fill {
+	/* for the bg color */
+	fill: currentColor !important;
+}
+
+.ql-picker-item {
+	/* for dropdown */
+	color: #444 !important;
+}
+
+/* Fixing height issues */
+.ql-container {
+	min-height: 200px; /* Ensure a minimum height for the container */
+	max-height: 400px; /* Optional: Max height for better control */
+	overflow-y: auto; /* Ensure scrolling if content exceeds max height */
+}
+
+/* Adjusting toolbar */
+.ql-toolbar {
+	min-height: 50px; /* Ensure toolbar has consistent height */
+}
+
+.ql-editor {
+	min-height: 150px; /* Prevent editor from shrinking below this size */
+}

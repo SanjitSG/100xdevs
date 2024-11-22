@@ -23,7 +23,7 @@ const Auth = ({ type }: { type: "signup" | "signin" }) => {
 	};
 
 	return (
-		<div className="h-screen m-3 flex items-center justify-center">
+		<div className="h-screen flex items-center justify-center">
 			<div className="space-y-5 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8">
 				<div className="text-center">
 					<p className="font-extrabold text-xl">Create an account</p>

@@ -15,7 +15,7 @@ function App() {
 		<>
 			<BrowserRouter>
 				<Toaster position="top-left" reverseOrder={false} />
-				<Navbar />
+
 				<Routes>
 					{/* Public Routes */}
 					<Route path="/signup" element={<Signup />} />
@@ -26,6 +26,7 @@ function App() {
 						path="/"
 						element={
 							<ProtectedRoute>
+								<Navbar />
 								<BulkBlogs />
 							</ProtectedRoute>
 						}
@@ -34,6 +35,7 @@ function App() {
 						path="/blog/:id"
 						element={
 							<ProtectedRoute>
+								<Navbar />
 								<Blog />
 							</ProtectedRoute>
 						}
@@ -42,6 +44,7 @@ function App() {
 						path="/editor"
 						element={
 							<ProtectedRoute>
+								<Navbar />
 								<Editor />
 							</ProtectedRoute>
 						}
