@@ -1,3 +1,5 @@
+import SignupComponent from "@/components/SignupComponent";
+
 export default function Home() {
-	return <div>Sign up</div>;
+	return <SignupComponent />;
 }
